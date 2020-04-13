@@ -102,7 +102,7 @@ public class BatchSearch {
 			
 			String[] pair = line.split(" ", 2);
 			Query query = parser.parse(pair[1]);
-      System.out.println(query.toString());
+      // System.out.println(query.toString());
 
 			totalQueryTime += doBatchSearch(in, searcher, pair[0], query, simstring);
 			totalQueries++;
