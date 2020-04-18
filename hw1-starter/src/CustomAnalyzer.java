@@ -28,13 +28,13 @@ public class CustomAnalyzer extends Analyzer {
       TokenStream tok = new StandardFilter(src);
       tok = new LowerCaseFilter(tok);
 
-      if (option == "1") {
+      if (option.equals("1")) {
         // 1. don't use stopwords + no stemming
-      } else if (option == "2") {
+      } else if (option.equals("2")) {
         // 2. default stopwords + no stemming
         tok = new StopFilter(tok, EnglishAnalyzer.getDefaultStopSet());
 
-      } else if (option == "3") {
+      } else if (option.equals("3")) {
         // 3. stopwords from file + Kstemmer
         try {
             Reader reader = new FileReader("inquery-stopwords.txt");

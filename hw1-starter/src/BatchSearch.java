@@ -53,7 +53,7 @@ public class BatchSearch {
 			} else if ("-simfn".equals(args[i])) {
 				simstring = args[i+1];
 				i++;
-			} else if ("-case".equals(args[i])) {
+			} else if ("-option".equals(args[i])) {
                 option = args[i+1];
                 i++;
             }
