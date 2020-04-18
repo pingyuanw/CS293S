@@ -44,7 +44,6 @@ public class CustomAnalyzer extends Analyzer {
             System.out.println("Cannot open stopwords file");
         }
         
-
         tok = new KStemFilter(tok);
       } else {
         // 0. default stopwords + porter stemming

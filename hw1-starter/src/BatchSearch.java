@@ -113,8 +113,8 @@ public class BatchSearch {
 		}
 		reader.close();
 		
-		//System.out.println(String.format("Total query time: %.0f ms, total number of queries: %.0f, average query processing time: %.3f ms",
-		//		totalQueryTime, totalQueries, (totalQueryTime/totalQueries)));
+		System.out.println(String.format("Total query time: %.0f ms, total number of queries: %.0f, average query processing time: %.3f ms",
+				totalQueryTime, totalQueries, (totalQueryTime/totalQueries)));
 	}
 
 	/**
