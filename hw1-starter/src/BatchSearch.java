@@ -38,6 +38,7 @@ public class BatchSearch {
 		String field = "contents";
 		String queries = null;
 		String simstring = "default";
+        String option = "0";
 
 		for(int i = 0;i < args.length;i++) {
 			if ("-index".equals(args[i])) {
@@ -52,7 +53,10 @@ public class BatchSearch {
 			} else if ("-simfn".equals(args[i])) {
 				simstring = args[i+1];
 				i++;
-			}
+			} else if ("-case".equals(args[i])) {
+                option = args[i+1];
+                i++;
+            }
 		}
 
 		Similarity simfn = null;
@@ -77,7 +81,7 @@ public class BatchSearch {
 		IndexReader reader = DirectoryReader.open(FSDirectory.open(new File(index).toPath()));
 		IndexSearcher searcher = new IndexSearcher(reader);
 		searcher.setSimilarity(simfn);
-		Analyzer analyzer = new CustomAnalyzer();
+		Analyzer analyzer = new CustomAnalyzer(option);
 		
 		BufferedReader in = null;
 		if (queries != null) {

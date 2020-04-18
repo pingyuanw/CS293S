@@ -14,8 +14,12 @@ import org.apache.lucene.analysis.standard.StandardFilter;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
 
 public class CustomAnalyzer extends Analyzer {
-	
-	public static final int maxTokenLength = 255;
+    
+    public static final int maxTokenLength = 255;
+    String option = "0";
+    public CustomAnalyzer(String option) {
+        this.option = option;
+    }
     
     @Override
     protected TokenStreamComponents createComponents(final String fieldName) {
@@ -23,8 +27,30 @@ public class CustomAnalyzer extends Analyzer {
       src.setMaxTokenLength(maxTokenLength);
       TokenStream tok = new StandardFilter(src);
       tok = new LowerCaseFilter(tok);
-      tok = new StopFilter(tok, EnglishAnalyzer.getDefaultStopSet());
-      tok = new PorterStemFilter(tok);
+
+      if (option == "1") {
+        // 1. don't use stopwords + no stemming
+      } else if (option == "2") {
+        // 2. default stopwords + no stemming
+        tok = new StopFilter(tok, EnglishAnalyzer.getDefaultStopSet());
+
+      } else if (option == "3") {
+        // 3. stopwords from file + Kstemmer
+        try {
+            Reader reader = new FileReader("inquery-stopwords.txt");
+            StopAnalyzer analyzer = new StopAnalyzer(reader);
+            tok = new StopFilter(tok, analyzer.getStopwordSet());
+        } catch (Exception e) {
+            System.out.println("Cannot open stopwords file");
+        }
+        
+
+        tok = new KStemFilter(tok);
+      } else {
+        // 0. default stopwords + porter stemming
+        tok = new PorterStemFilter(tok);
+      }
+
       return new TokenStreamComponents(src, tok) {
         @Override
         protected void setReader(final Reader reader) {
