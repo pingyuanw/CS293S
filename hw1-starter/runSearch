@@ -1,0 +1,15 @@
+java -cp "bin:lib/*" BatchSearch -index index0/ -queries test-data/title-queries.301-450 -simfn default -option 0 > output/default0.out
+
+java -cp "bin:lib/*" BatchSearch -index index1/ -queries test-data/title-queries.301-450 -simfn default -option 1 > output/default1.out
+
+java -cp "bin:lib/*" BatchSearch -index index2/ -queries test-data/title-queries.301-450 -simfn default -option 2 > output/default2.out
+
+java -cp "bin:lib/*" BatchSearch -index index3/ -queries test-data/title-queries.301-450 -simfn default -option 3 > output/default3.out
+
+java -cp "bin:lib/*" BatchSearch -index index0/ -queries test-data/title-queries.301-450 -simfn bm25 -option 0 > output/bm0.out
+
+java -cp "bin:lib/*" BatchSearch -index index1/ -queries test-data/title-queries.301-450 -simfn bm25 -option 1 > output/bm1.out
+
+java -cp "bin:lib/*" BatchSearch -index index2/ -queries test-data/title-queries.301-450 -simfn bm25 -option 2 > output/bm2.out
+
+java -cp "bin:lib/*" BatchSearch -index index3/ -queries test-data/title-queries.301-450 -simfn bm25 -option 3 > output/bm3.out

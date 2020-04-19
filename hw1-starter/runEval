@@ -1,0 +1,15 @@
+trec_eval/trec_eval -q -M1000 -m ndcg_cut test-data/qrels.trec6-8.nocr output/default0.out > output/default0.eval
+
+trec_eval/trec_eval -q -M1000 -m ndcg_cut test-data/qrels.trec6-8.nocr output/default1.out > output/default1.eval
+
+trec_eval/trec_eval -q -M1000 -m ndcg_cut test-data/qrels.trec6-8.nocr output/default2.out > output/default2.eval
+
+trec_eval/trec_eval -q -M1000 -m ndcg_cut test-data/qrels.trec6-8.nocr output/default3.out > output/default3.eval
+
+trec_eval/trec_eval -q -M1000 -m ndcg_cut test-data/qrels.trec6-8.nocr output/bm0.out > output/bm0.eval
+
+trec_eval/trec_eval -q -M1000 -m ndcg_cut test-data/qrels.trec6-8.nocr output/bm1.out > output/bm1.eval
+
+trec_eval/trec_eval -q -M1000 -m ndcg_cut test-data/qrels.trec6-8.nocr output/bm2.out > output/bm2.eval
+
+trec_eval/trec_eval -q -M1000 -m ndcg_cut test-data/qrels.trec6-8.nocr output/bm3.out > output/bm3.eval

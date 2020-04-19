@@ -1,0 +1,7 @@
+java -cp "bin:lib/*" IndexTREC -docs docs -index index0
+
+java -cp "bin:lib/*" IndexTREC -docs docs -option 1 -index index1
+
+java -cp "bin:lib/*" IndexTREC -docs docs -option 2 -index index2
+
+java -cp "bin:lib/*" IndexTREC -docs docs -option 3 -index index3
