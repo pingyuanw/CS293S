@@ -23,6 +23,7 @@ public class IndexTREC {
 		String indexPath = "index";
 		String docsPath = null;
 		boolean create = true;
+        String option = "0";
 		for(int i=0;i<args.length;i++) {
 			if ("-index".equals(args[i])) {
 				indexPath = args[i+1];
@@ -32,7 +33,9 @@ public class IndexTREC {
 				i++;
 			} else if ("-update".equals(args[i])) {
 				create = false;
-			}
+			} else if ("-option".equals(args[i])) {
+                option = args[i+1];
+            }
 		}
 
 		if (docsPath == null) {
@@ -51,7 +54,7 @@ public class IndexTREC {
 			System.out.println("Indexing to directory '" + indexPath + "'...");
 
 			Directory dir = FSDirectory.open(new File(indexPath).toPath());
-			Analyzer analyzer = new CustomAnalyzer();
+			Analyzer analyzer = new CustomAnalyzer(option);
 			IndexWriterConfig iwc = new IndexWriterConfig(analyzer);
 
 			if (create) {
