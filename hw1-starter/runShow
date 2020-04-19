@@ -1,0 +1,37 @@
+files=(
+	default0
+	default1
+	default2
+	default3
+	bm0
+	bm1
+	bm2
+	bm3
+)
+echo Search Quality-----------------
+for file in "${files[@]}"
+do
+	echo $file
+	tail -9 output/$file.eval | head -2
+done
+
+echo Response Time------------------
+for file in "${files[@]}"
+do
+        echo $file
+        tail -1 output/$file.out
+done
+
+echo 310------------------
+for file in "${files[@]}"
+do
+        echo $file
+        head -90 output/$file.eval | tail -9 | head -2
+done
+
+echo 311------------------
+for file in "${files[@]}"
+do
+        echo $file
+        head -99 output/$file.eval | tail -9 | head -2
+done
