@@ -59,5 +59,9 @@ if __name__ == "__main__":
 
     item_opinion = np.load(PATH + 'item_opinion.npy')
 
+    print('### user_tree:')
+    user_tree.better_print_tree(user_tree.root)
+    print('### item_tree:')
+    item_tree.better_print_tree(item_tree.root)
     recommend_for(pred_rating, user_tree, item_tree, user_opinion, item_opinion, 5)
 # explain(0, 0)
