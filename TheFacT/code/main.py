@@ -180,7 +180,7 @@ if __name__ == "__main__":
     parser.add_argument("--learning_rate", help="learning rate for sgd", default=0.05)
     parser.add_argument("--random_seed", help="random seed for initialization and BPR calculation", default=0)
     parser.add_argument("--num_run", help="number of iterations for alternatively creating the trees", default=5)
-    parser.add_argument("--save_dir", help="number of iterations for alternatively creating the trees", default="../results/")
+    parser.add_argument("--save_dir", help="save result to dir", default="../results/")
 
     args = parser.parse_args()
     train_file = args.train_file
