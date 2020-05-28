@@ -26,7 +26,6 @@ def getRatingMatrix(filename):
     num_users = data[:, 0].max() + 1
     num_items = data[:, 1].max() + 1
     num_features = max(feature) + 1
-    print(num_features)
     
     # create rating matrix, and user_opinion, item_opinion matrices
     # user_opinion: user preference for each feature
@@ -70,6 +69,15 @@ def ndcg_k(r, k):
     return dcg_k(r, k) / idcg
 
 def get_ndcg(prediction, rating_matrix, k):
+    print('Shape:')
+    print(prediction.shape)
+    print(rating_matrix.shape)
+    while prediction.shape[0] > rating_matrix.shape[0]:
+        prediction = np.delete(prediction, prediction.shape[0]-1, 0)
+    while prediction.shape[1] > rating_matrix.shape[1]:
+        prediction = np.delete(prediction, prediction.shape[1]-1, 1)
+    print(prediction.shape)
+    print(rating_matrix.shape)
 
     num_user, num_item = rating_matrix.shape
     ndcg_overall = []
@@ -121,6 +129,11 @@ def AlternativeOptimization(rating_matrix, user_opinion, item_opinion, num_dim, 
 
     user_vector, item_vector = MatrixFactorization(num_dim, lr, lambda_u, lambda_v, 50, rating_matrix)
     pred = np.dot(user_vector, item_vector.T)
+
+    # save model for matrix factorization
+    np.save(save_dir + "mf_item_vector", item_vector)
+    np.save(save_dir + "mf_user_vector", user_vector)
+    np.save(save_dir + "mf_pred_rating", pred)
 
     i = 0
     while i < num_run:
@@ -229,10 +242,6 @@ if __name__ == "__main__":
     print "Number of features", user_opinion.shape[1]
 
     # get the NDCG results
-    print "********** User tree **********"
-    user_tree.print_tree(user_tree.root)
-    print "********** Item tree **********" 
-    item_tree.print_tree(item_tree.root)
     print "********** NDCG **********"
     ndcg_10 = get_ndcg(pred_rating, test_rating, 10)
     print "NDCG@10: ", ndcg_10

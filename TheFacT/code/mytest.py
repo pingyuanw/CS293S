@@ -49,35 +49,44 @@ if __name__ == "__main__":
     PATH = args.path
     test_file = args.test_file
 
-    user_tree = np.load(PATH + 'user_tree.npy', allow_pickle=True)[0]
-    item_tree = np.load(PATH + 'item_tree.npy', allow_pickle=True)[0]
+
+    mf_item_vector = np.load(PATH + 'mf_item_vector.npy')
+    mf_user_vector = np.load(PATH + 'mf_user_vector.npy')
+    mf_pred_rating = np.load(PATH + 'mf_pred_rating.npy')
 
     item_vector = np.load(PATH + 'item_vector.npy')
-    # item_vector = np.loadtxt(PATH + 'item_vector.txt')
     user_vector = np.load(PATH + 'user_vector.npy')
-    # new_rating = np.dot(user_vector, item_vector.T)
     pred_rating = np.load(PATH + 'pred_rating.npy')
+    # pred_rating = np.dot(user_vector, item_vector.T)
 
     user_opinion = np.load(PATH + 'user_opinion.npy')
-
     item_opinion = np.load(PATH + 'item_opinion.npy')
-
+    user_tree = np.load(PATH + 'user_tree.npy', allow_pickle=True)[0]
+    item_tree = np.load(PATH + 'item_tree.npy', allow_pickle=True)[0]
+    
     print('### user_tree:')
     user_tree.better_print_tree(user_tree.root)
     print('### item_tree:')
     item_tree.better_print_tree(item_tree.root)
     recommend_for(pred_rating, user_tree, item_tree, user_opinion, item_opinion, 5)
 
-    pred_rating = np.dot(user_vector, item_vector.T)
 
     # test on test data with the trained model
     print "********** Load test data **********"
     test_rating, user_opinion_test, item_opinion_test = getRatingMatrix(test_file)
     print "Number of users", test_rating.shape[0]
     print "Number of items", test_rating.shape[1]
-    print "Number of features", user_opinion.shape[1]
+    print "Number of features", user_opinion_test.shape[1]
 
     # get the NDCG results
+    print "********** NDCG only with mf**********"
+    ndcg_10 = get_ndcg(mf_pred_rating, test_rating, 10)
+    print "NDCG@10: ", ndcg_10
+    ndcg_20 = get_ndcg(mf_pred_rating, test_rating, 20)
+    print "NDCG@20: ", ndcg_20
+    ndcg_50 = get_ndcg(mf_pred_rating, test_rating, 50)
+    print "NDCG@50: ", ndcg_50
+
     print "********** NDCG **********"
     ndcg_10 = get_ndcg(pred_rating, test_rating, 10)
     print "NDCG@10: ", ndcg_10
